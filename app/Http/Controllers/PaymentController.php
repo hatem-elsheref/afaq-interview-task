@@ -30,6 +30,6 @@ class PaymentController extends Controller
 
        Log::info('Webhook response results : ' . json_encode($resource));
 
-       return response()->json(['message' => 'Webhook handled successfully']);
+       return response()->json(['message' => 'Webhook handled successfully!!'], $resource['success'] ? 200 : 400);
     }
 }

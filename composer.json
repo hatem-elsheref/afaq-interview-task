@@ -11,7 +11,8 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "paypal/paypal-server-sdk": "0.5.1",
-        "srmklive/paypal": "^3.0"
+        "srmklive/paypal": "^3.0",
+        "stripe/stripe-php": "^16.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

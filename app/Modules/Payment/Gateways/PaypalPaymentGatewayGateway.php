@@ -22,8 +22,8 @@ class PaypalPaymentGatewayGateway extends PaymentGateway implements IPaymentGate
             $payment = $provider->createOrder([
                 'intent' => 'CAPTURE',
                 'application_context' => [
-                    'return_url' => route('payment.success', ['provider' => 'paypal']),
-                    'cancel_url' => route('payment.cancel', ['provider' => 'paypal']),
+                    'return_url' => route('payment.success', ['provider' => self::GATEWAY]),
+                    'cancel_url' => route('payment.cancel' , ['provider' => self::GATEWAY]),
                 ],
                 'purchase_units' => [
                     [
@@ -87,8 +87,14 @@ class PaypalPaymentGatewayGateway extends PaymentGateway implements IPaymentGate
                         : $this->markTransactionAsFailed($captureStatusResponse['id'], self::GATEWAY);
                 }
 
-                if (isset($captureStatusResponse['status']) && $captureStatusResponse['status'] === 'CREATED') {
-                    CancelPendingTransaction::dispatch($data, self::GATEWAY)->delay(now()->addDay());
+                $transaction = Transaction::query()
+                    ->where('transaction_number', $data['id'])->first();
+
+                if ($transaction && !$transaction->is_notified && isset($captureStatusResponse['status']) && $captureStatusResponse['status'] === 'CREATED') {
+
+                    $transaction->update(['is_notified' => true]);
+
+                    CancelPendingTransaction::dispatch($data)->delay(now()->addDay());
                 }
 
             }
@@ -124,7 +130,6 @@ class PaypalPaymentGatewayGateway extends PaymentGateway implements IPaymentGate
             $transactionNumber = $data['id'];
 
             return $this->markTransactionAsCompleted($transactionNumber, self::GATEWAY);
-
         }
 
         return ['success' => true];

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
-    protected $fillable = ['order_id', 'transaction_number', 'payment_id', 'amount', 'status', 'payment_gateway', 'payment_method'];
+    protected $fillable = ['order_id', 'transaction_number', 'payment_id', 'amount', 'status', 'payment_gateway', 'payment_method', 'meta', 'is_notified'];
 
     public function getIsPaidAttribute(): bool
     {

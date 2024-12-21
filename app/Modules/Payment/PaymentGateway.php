@@ -33,7 +33,10 @@ abstract class PaymentGateway
                 throw new Exception('Undefined payment');
 
             if ($transaction->status === TransactionStatus::Pending->value){
-                $transaction->update(['status' => TransactionStatus::Approved->value]);
+                $transaction->update([
+                    'status'      => TransactionStatus::Approved->value,
+                    'is_notified' => true
+                ]);
 
                 $transaction->order->update([
                     'status' => OrderStatus::Paid->value
@@ -71,7 +74,10 @@ abstract class PaymentGateway
                 throw new Exception('Undefined payment');
 
             if ($transaction->status === TransactionStatus::Pending->value){
-                $transaction->update(['status' => TransactionStatus::Rejected->value]);
+                $transaction->update([
+                    'status' => TransactionStatus::Rejected->value,
+                    'is_notified' => true
+                ]);
 
                 $transaction->order->update([
                     'status' => OrderStatus::Cancelled->value
