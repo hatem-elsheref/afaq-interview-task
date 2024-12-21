@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PaymentRequest;
 use App\Modules\Payment\IPaymentGatewayInterface;
-use App\Modules\Payment\PaymentService;
+use App\Services\PaymentService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
@@ -15,7 +14,7 @@ class CheckoutController extends Controller
         $this->paymentService->setGateway($paymentGateway);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(PaymentRequest $request): RedirectResponse
     {
         $resource = $this->paymentService->process($request);
 

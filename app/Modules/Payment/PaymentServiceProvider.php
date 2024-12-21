@@ -2,6 +2,8 @@
 
 namespace App\Modules\Payment;
 
+use App\Services\OrderService;
+use App\Services\PaymentService;
 use Illuminate\Support\ServiceProvider;
 
 class PaymentServiceProvider extends ServiceProvider

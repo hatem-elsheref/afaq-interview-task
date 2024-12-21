@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Payment;
+namespace App\Services;
 
 use App\Enums\OrderStatus;
 use App\Models\Order;

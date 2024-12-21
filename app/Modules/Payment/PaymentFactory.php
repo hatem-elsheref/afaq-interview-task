@@ -2,8 +2,6 @@
 
 namespace App\Modules\Payment;
 
-use App\Modules\Payment\Gateways\MoyasarPaymentGatewayGateway;
-use App\Modules\Payment\Gateways\PaymobPaymentGatewayGateway;
 use App\Modules\Payment\Gateways\PaypalPaymentGatewayGateway;
 use App\Modules\Payment\Gateways\StripePaymentGatewayGateway;
 

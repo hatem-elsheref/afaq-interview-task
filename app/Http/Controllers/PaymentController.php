@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Modules\Payment\IPaymentGatewayInterface;
-use App\Modules\Payment\PaymentService;
+use App\Services\PaymentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;

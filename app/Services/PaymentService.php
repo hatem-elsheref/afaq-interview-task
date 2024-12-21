@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Modules\Payment;
+namespace App\Services;
 
 use App\Models\Product;
+use App\Modules\Payment\IPaymentGatewayInterface;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -24,19 +25,7 @@ class PaymentService
 
         $customer = $request->user();
 
-        //$productItems = $request->validated();
-        $productItems = [
-            'products' => [
-                [
-                    'product_id' => 1,
-                    'quantity'   => 1,
-                ],
-                [
-                    'product_id' => 3,
-                    'quantity'   => 5,
-                ]
-            ]
-        ];
+        $productItems = $request->validated();
 
         $totalPrice = 0;
 
